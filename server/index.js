@@ -11,8 +11,8 @@ import UserModel from "./models/UserModel.js";
 import checkAuth from "./utils/checkAuth.js";
 
 
-const PORT = process.env.PORT;
-const HOST = process.env.HOST;
+const PORT = 4444;
+const HOST = "localhost";
 
 const app = express();
 mongoose
