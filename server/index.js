@@ -3,7 +3,7 @@ import cors from "cors";
 import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
 import { validationResult } from "express-validator";
-// import bcrypt from "bcrypt";
+import bcrypt from "bcrypt";
 
 import { registerValidator } from "./validations/auth.js";
 
@@ -39,10 +39,10 @@ app.post("/auth/login", async (req, res) => {
          });
       }
 
-      // const isValidPass = await bcrypt.compare(
-      //    req.body.password,
-      //    user._doc.passwordHash
-      // );
+      const isValidPass = await bcrypt.compare(
+         req.body.password,
+         user._doc.passwordHash
+      );
       if (!isValidPass) {
          return res.status(400).json({
             message: "Неверный логин или пароль",
@@ -82,13 +82,13 @@ app.post("/auth/register", registerValidator, async (req, res) => {
       }
 
       const password = req.body.password;
-      // const salt = await bcrypt.genSalt(10);
-      // const hash = await bcrypt.hash(password, salt);
+      const salt = await bcrypt.genSalt(10);
+      const hash = await bcrypt.hash(password, salt);
 
       const doc = new UserModel({
          email: req.body.email,
          fullName: req.body.fullName,
-         passwordHash: 1,
+         passwordHash: hash,
          avatarUrl: req.body.avatarUrl,
       });
 
