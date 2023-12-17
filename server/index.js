@@ -74,6 +74,7 @@ app.post("/auth/login", async (req, res) => {
 });
 
 app.post("/auth/register", registerValidator, async (req, res) => {
+   console.log(1);
    try {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
