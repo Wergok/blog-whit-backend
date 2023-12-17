@@ -1,0 +1,12 @@
+.posts {
+   display: flex;
+   flex-wrap: wrap;
+
+   gap: 15px;
+}
+
+.posts__post {
+   flex: 32% 0;
+   text-align: center;
+   
+}
